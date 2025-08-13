@@ -6,20 +6,18 @@ var imagekit = new ImageKit({
     urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT
 });
 
-function uploadFile(file) {
-    return new Promise((resolve, reject) => {
-        imagekit.upload({
-            file: file.buffer,
-            fileName: "hello-cohort"
-        }, (error, result) => {
-            if (error) {
-                reject(error)
-            } else {
-                resolve(result)
-            }
-        })
+
+async function uploadFile(file, fileName) {
+
+    const result = await imagekit.upload({
+        file,
+        fileName,
+        folder: 'mern14-audio'
     })
+
+    return result;
 }
 
 
-module.exports = uploadFile;
+
+module.exports = uploadFile
